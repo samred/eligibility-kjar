@@ -1,0 +1,19 @@
+package com.redhat.license
+
+query "get eligibility"()
+  eligibility : Eligibility()
+end
+
+rule "minor"
+when
+  age : Age(age < 18)
+then
+  insert(new Eligibility("You are too young to drive."));
+end
+
+rule "adult"
+when
+  age : Age(age > 18)
+then
+  insert(new Eligibility("You can drive."));
+end
